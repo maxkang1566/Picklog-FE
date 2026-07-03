@@ -1,11 +1,12 @@
 /**
  * src/components/common/CustomTabBar.tsx
- * Variant 디자인 기반 플로팅 pill 바텀 네비게이션
+ * 토스 스타일 플랫 하단 탭바
  *
  * TabNavigator의 tabBar prop에 전달하는 커스텀 컴포넌트입니다.
- * - 하단에서 32px 떠 있는 pill 모양
- * - 활성 탭: 아이콘 채워짐 + 라벨 표시
- * - 비활성 탭: 아이콘 외곽선만 + 라벨 숨김
+ * - 하단 고정 플랫 바 (in-flow, position:absolute 아님 → 화면이 자동으로 바 위에 배치됨)
+ * - 흰 배경 + 상단 헤어라인 보더로 경계 정의
+ * - 활성 탭: 아이콘 채워짐 + 블랙 라벨
+ * - 비활성 탭: 아이콘 외곽선 + 그레이 라벨 (라벨 항상 표시)
  */
 
 import React from 'react';
@@ -34,8 +35,8 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.wrapper, { bottom: Math.max(insets.bottom, 16) + 16 }]}>
-      <View style={styles.pill}>
+    <View style={[styles.bar, { paddingBottom: Math.max(insets.bottom, 8) }]}>
+      <View style={styles.row}>
         {state.routes.map((route, index) => {
           const isFocused = state.index === index;
           const config = TAB_CONFIG[route.name] ?? {
@@ -70,9 +71,9 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
                 size={24}
                 color={isFocused ? THEME.colors.textMain : THEME.colors.textMuted}
               />
-              {isFocused && (
-                <Text style={styles.label}>{config.label}</Text>
-              )}
+              <Text style={[styles.label, isFocused ? styles.labelActive : styles.labelInactive]}>
+                {config.label}
+              </Text>
             </TouchableOpacity>
           );
         })}
@@ -82,40 +83,35 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    position: 'absolute',
-    left: 24,
-    right: 24,
-    alignItems: 'center',
-    zIndex: 100,
-    // Android elevation
+  bar: {
+    backgroundColor: THEME.colors.surface,
+    borderTopWidth: 1,
+    borderTopColor: THEME.colors.border,
+    paddingTop: 8,
     ...Platform.select({
       android: { elevation: 8 },
     }),
   },
-  pill: {
+  row: {
     flexDirection: 'row',
-    backgroundColor: THEME.colors.surface,
-    borderRadius: THEME.radius.pill,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    maxWidth: 382,
-    ...THEME.shadow.float,
+    justifyContent: 'space-around',
   },
   item: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    flex: 1,
+    height: 48,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 3,
   },
   label: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: THEME.font.weight.semibold,
+  },
+  labelActive: {
     color: THEME.colors.textMain,
-    marginTop: 2,
+  },
+  labelInactive: {
+    color: THEME.colors.textMuted,
   },
 });

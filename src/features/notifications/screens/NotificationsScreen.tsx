@@ -219,7 +219,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 4,
-    ...THEME.shadow.float,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.soft,
   },
   title: {
     fontSize: THEME.font.size.xxl,
@@ -236,12 +238,14 @@ const styles = StyleSheet.create({
 
   // 요약 카드
   summaryCard: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
+    backgroundColor: THEME.colors.surface,
     borderRadius: THEME.radius.lg,
     paddingVertical: 20,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 32,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
   summaryItem: { alignItems: 'center' },
@@ -258,7 +262,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     width: 1,
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: THEME.colors.divider,
   },
 
   // 섹션 라벨
@@ -281,6 +285,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 16,
     marginBottom: 12,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
     shadowOpacity: 0.02,
   },

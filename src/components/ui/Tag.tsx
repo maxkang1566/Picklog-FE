@@ -42,19 +42,14 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   tag: {
-    backgroundColor: THEME.colors.surface,
-    borderWidth: 1,
-    borderColor: '#EAEAEA',
+    backgroundColor: THEME.colors.tagBg,
     borderRadius: THEME.radius.pill,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    ...THEME.shadow.soft,
-    shadowOpacity: 0.02,
-    elevation: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
   },
   label: {
     fontSize: THEME.font.size.sm,
     fontWeight: THEME.font.weight.medium,
-    color: THEME.colors.textMain,
+    color: THEME.colors.textSub,
   },
 });

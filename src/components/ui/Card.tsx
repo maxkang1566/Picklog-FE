@@ -23,8 +23,10 @@ export default function Card({ children, style }: Props) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: THEME.colors.surface,
-    borderRadius: THEME.radius.xl,
+    borderRadius: THEME.radius.lg,
     padding: THEME.spacing.lg,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
 });

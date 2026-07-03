@@ -1,34 +1,45 @@
 /**
  * src/constants/index.ts
- * 디자인 시스템 토큰 - Variant 디자인 기반
+ * 디자인 시스템 토큰 - 토스(Toss) 스타일
  *
- * THEME: Variant HTML에서 추출한 새 디자인 시스템 (메인)
+ * THEME: 토스 스타일 디자인 시스템 (메인)
+ *   - 흰색/연그레이 배경, 브랜드 블랙(#111111) 액센트, 그레이 텍스트 위계
+ *   - 라운드 사각(버튼/입력/카드), 플랫한 서피스, 절제된 그림자
  * COLORS / FONTS / SPACING: 하위 호환용 (기존 컴포넌트가 참조)
  */
 
+import { Platform } from 'react-native';
+import type { ViewStyle } from 'react-native';
+
 // ─────────────────────────────────────────
-// THEME (Variant 디자인 시스템 토큰)
+// THEME (토스 스타일 디자인 시스템 토큰)
 // ─────────────────────────────────────────
 export const THEME = {
   colors: {
-    // 배경 그라디언트
-    bgTop: '#FDF0F6',
-    bgMid: '#FFF7EE',
-    bgBot: '#FDF2E8',
+    // 배경 (토스: 흰색 / 연그레이) — 키 이름은 하위 호환 유지
+    bgTop: '#FFFFFF',
+    bgMid: '#F7F8FA',
+    bgBot: '#F7F8FA',
 
     // 서피스
     surface: '#FFFFFF',
+    // ※ 반투명 오버레이용(이미지/컬러 위) — 불투명화 금지
     surfaceTransparent: 'rgba(255, 255, 255, 0.7)',
 
-    // 텍스트
-    textMain: '#111111',
-    textMuted: '#8E8E93',
-    textPlaceholder: '#C7C7CC',
+    // 텍스트 위계 (토스)
+    textMain: '#191F28',
+    textSub: '#4E5968',
+    textMuted: '#8B95A1',
+    textPlaceholder: '#B0B8C1',
 
-    // 액센트
-    accentSoft: '#F6EBE2',
+    // 액센트 (브랜드 블랙 유지)
+    accentSoft: '#F2F4F6',
     accentDark: '#111111',
-    tagBg: '#F0F0F5',
+    tagBg: '#F2F4F6',
+
+    // 보더 / 구분선 (토스 헤어라인)
+    border: '#E5E8EB',
+    divider: '#F2F4F6',
 
     // 시스템
     iosGreen: '#34C759',
@@ -54,45 +65,45 @@ export const THEME = {
   },
 
   radius: {
-    xl: 32,
-    lg: 24,
+    xl: 24,
+    lg: 20,
     md: 16,
     sm: 12,
-    pill: 999,
+    button: 14, // 라운드 사각 버튼/입력 (토스 CTA)
+    pill: 999, // 칩/아바타 등 완전 둥근 요소 전용
   },
 
-  // 그림자 — Platform.select로 native/web 분기
-  // 사용: ...Platform.select({ native: THEME.shadow.soft, web: THEME.shadowWeb.soft })
-  // 또는 컴포넌트에서 직접 분기
+  // 그림자 — 스타일에서는 ...THEME.shadow.soft 로 spread하거나,
+  // native/web 분기가 필요하면 아래 shadowStyle('soft') 헬퍼를 사용
   shadow: {
     soft: {
       shadowColor: '#000000',
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.04,
-      shadowRadius: 20,
-      elevation: 2,
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.03,
+      shadowRadius: 8,
+      elevation: 1,
     },
     float: {
       shadowColor: '#000000',
       shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.06,
+      shadowOpacity: 0.05,
       shadowRadius: 12,
-      elevation: 4,
+      elevation: 3,
     },
     nav: {
-      shadowColor: '#FDF2E8',
-      shadowOffset: { width: 0, height: -5 },
-      shadowOpacity: 0.8,
-      shadowRadius: 15,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: -2 },
+      shadowOpacity: 0.04,
+      shadowRadius: 8,
       elevation: 8,
     },
   },
 
   // React Native Web용 boxShadow
   shadowWeb: {
-    soft: { boxShadow: '0px 8px 20px rgba(0,0,0,0.04)' },
-    float: { boxShadow: '0px 4px 12px rgba(0,0,0,0.06)' },
-    nav: { boxShadow: '0px -5px 15px rgba(253,242,232,0.8)' },
+    soft: { boxShadow: '0px 2px 8px rgba(0,0,0,0.03)' },
+    float: { boxShadow: '0px 4px 12px rgba(0,0,0,0.05)' },
+    nav: { boxShadow: '0px -2px 8px rgba(0,0,0,0.04)' },
   },
 
   spacing: {
@@ -123,6 +134,16 @@ export const THEME = {
     },
   },
 } as const;
+
+/**
+ * 그림자 Platform 분기 헬퍼 — StyleSheet에서 ...shadowStyle('soft') 로 사용.
+ * Platform.select({ native, web }) spread는 boxShadow union 때문에 ViewStyle과
+ * 타입이 안 맞으므로(TS2769), 분기가 필요할 땐 반드시 이 헬퍼를 쓴다.
+ */
+export const shadowStyle = (level: keyof typeof THEME.shadow): ViewStyle =>
+  Platform.OS === 'web'
+    ? (THEME.shadowWeb[level] as unknown as ViewStyle)
+    : (THEME.shadow[level] as ViewStyle);
 
 // ─────────────────────────────────────────
 // 하위 호환 export (기존 컴포넌트용)

@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: THEME.spacing.lg,
     paddingTop: THEME.spacing.md,
-    paddingBottom: 60,
+    paddingBottom: THEME.spacing.xl,
   },
 
   headerRow: {
@@ -277,7 +277,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    ...THEME.shadow.float,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.soft,
   },
   pageTitle: {
     fontSize: THEME.font.size.xxl,
@@ -291,6 +293,8 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.lg,
     padding: THEME.spacing.lg,
     marginBottom: 28,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
   introTitle: {
@@ -330,7 +334,7 @@ const styles = StyleSheet.create({
   introAxisDivider: {
     width: 1,
     height: 28,
-    backgroundColor: 'rgba(0,0,0,0.08)',
+    backgroundColor: THEME.colors.border,
   },
 
   sectionHeader: {
@@ -352,6 +356,8 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.lg,
     padding: THEME.spacing.md,
     marginBottom: THEME.spacing.sm,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
   cardHeader: {
@@ -383,7 +389,7 @@ const styles = StyleSheet.create({
     marginTop: THEME.spacing.md,
     paddingTop: THEME.spacing.md,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(0,0,0,0.05)',
+    borderTopColor: THEME.colors.divider,
   },
   cardDesc: {
     fontSize: THEME.font.size.sm,

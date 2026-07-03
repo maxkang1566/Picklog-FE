@@ -120,7 +120,7 @@ export default function AddPlaceScreen({ navigation }: Props) {
         </View>
         {isLoading
           ? <ActivityIndicator size="small" color={COLORS.primary} />
-          : <Ionicons name="chevron-forward" size={16} color={COLORS.gray[400]} />
+          : <Ionicons name="chevron-forward" size={16} color={THEME.colors.textPlaceholder} />
         }
       </TouchableOpacity>
     );
@@ -143,20 +143,20 @@ export default function AddPlaceScreen({ navigation }: Props) {
       >
         {/* 검색 바 */}
         <View style={styles.searchBar}>
-          <Ionicons name="search" size={18} color={COLORS.gray[400]} style={styles.searchIcon} />
+          <Ionicons name="search" size={18} color={THEME.colors.textPlaceholder} style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             value={query}
             onChangeText={setQuery}
             placeholder="장소명으로 검색 (예: 성수 카페)"
-            placeholderTextColor={COLORS.gray[400]}
+            placeholderTextColor={THEME.colors.textPlaceholder}
             returnKeyType="search"
             onSubmitEditing={handleSearch}
             autoFocus
           />
           {query.length > 0 && (
             <TouchableOpacity onPress={() => { setQuery(''); setResults([]); }}>
-              <Ionicons name="close-circle" size={18} color={COLORS.gray[400]} />
+              <Ionicons name="close-circle" size={18} color={THEME.colors.textPlaceholder} />
             </TouchableOpacity>
           )}
         </View>
@@ -199,7 +199,7 @@ export default function AddPlaceScreen({ navigation }: Props) {
           ListEmptyComponent={
             !isSearching && query.trim() && results.length === 0 ? null : (
               <View style={styles.emptyState}>
-                <Ionicons name="search-outline" size={48} color={COLORS.gray[300]} />
+                <Ionicons name="search-outline" size={48} color={THEME.colors.textPlaceholder} />
                 <Text style={styles.emptyText}>
                   장소명을 입력하고 검색해보세요{'\n'}예: "연남동 카페", "경복궁", "성수 맛집"
                 </Text>
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: THEME.colors.surface,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray[200],
+    borderBottomColor: THEME.colors.divider,
   },
   closeBtn: {
     width: 40,
@@ -245,13 +245,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.white,
-    borderRadius: 12,
+    borderRadius: THEME.radius.button,
     margin: SPACING.md,
     marginBottom: SPACING.sm,
     paddingHorizontal: SPACING.md,
     paddingVertical: Platform.OS === 'ios' ? 12 : 8,
     borderWidth: 1,
-    borderColor: COLORS.gray[200],
+    borderColor: THEME.colors.border,
     gap: SPACING.sm,
   },
   searchIcon: { flexShrink: 0 },
@@ -263,8 +263,8 @@ const styles = StyleSheet.create({
   },
 
   searchBtn: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 10,
+    backgroundColor: THEME.colors.accentDark,
+    borderRadius: THEME.radius.button,
     marginHorizontal: SPACING.md,
     marginBottom: SPACING.md,
     paddingVertical: 12,
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   },
   resultCount: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     marginBottom: SPACING.sm,
     fontWeight: FONTS.weight.medium,
   },
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
     padding: SPACING.md,
     marginBottom: SPACING.sm,
     borderWidth: 1,
-    borderColor: COLORS.gray[100],
+    borderColor: THEME.colors.border,
     gap: SPACING.sm,
   },
   resultIconWrap: {
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
   },
   resultAddr: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     marginBottom: 2,
   },
   resultCategory: {
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: FONTS.size.md,
-    color: COLORS.gray[400],
+    color: THEME.colors.textPlaceholder,
     textAlign: 'center',
     lineHeight: 24,
   },

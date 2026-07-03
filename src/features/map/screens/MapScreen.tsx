@@ -175,7 +175,7 @@ export default function MapScreen() {
           <Text style={styles.headerTitle}>공간 지도</Text>
           <View style={styles.titleRight}>
             {isLoadingSpots && (
-              <ActivityIndicator size="small" color={COLORS.gray[400]} style={{ marginRight: 4 }} />
+              <ActivityIndicator size="small" color={THEME.colors.textPlaceholder} style={{ marginRight: 4 }} />
             )}
             <Text style={styles.markerCount}>{markers.length}개</Text>
             <TouchableOpacity
@@ -183,7 +183,7 @@ export default function MapScreen() {
               onPress={() => loadAllSpots(storages)}
               disabled={isLoadingSpots}
             >
-              <Ionicons name="refresh-outline" size={16} color={COLORS.gray[600]} />
+              <Ionicons name="refresh-outline" size={16} color={THEME.colors.textSub} />
             </TouchableOpacity>
           </View>
         </View>
@@ -202,7 +202,7 @@ export default function MapScreen() {
             <Ionicons
               name="bookmark-outline"
               size={12}
-              color={selectedStorageId === null ? COLORS.white : COLORS.gray[500]}
+              color={selectedStorageId === null ? '#fff' : THEME.colors.textMuted}
             />
             <Text style={[styles.chipText, selectedStorageId === null && styles.chipTextSelected]}>
               전체
@@ -219,7 +219,7 @@ export default function MapScreen() {
               <Ionicons
                 name={s.is_public ? 'people-outline' : 'lock-closed-outline'}
                 size={12}
-                color={selectedStorageId === s.id ? COLORS.white : COLORS.gray[500]}
+                color={selectedStorageId === s.id ? '#fff' : THEME.colors.textMuted}
               />
               <Text
                 style={[styles.chipText, selectedStorageId === s.id && styles.chipTextSelected]}
@@ -253,7 +253,7 @@ export default function MapScreen() {
       {!isLoadingSpots && markers.length === 0 && allSpots.length === 0 && (
         <View style={styles.emptyOverlay} pointerEvents="none">
           <View style={styles.emptyCard}>
-            <Ionicons name="map-outline" size={24} color={COLORS.gray[400]} />
+            <Ionicons name="map-outline" size={24} color={THEME.colors.textPlaceholder} />
             <Text style={styles.emptyText}>저장한 공간이 없어요{'\n'}장소를 추가해보세요</Text>
           </View>
         </View>
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   headerArea: {
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray[200],
+    borderBottomColor: THEME.colors.divider,
   },
   titleRow: {
     flexDirection: 'row',
@@ -294,14 +294,14 @@ const styles = StyleSheet.create({
   },
   markerCount: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     fontWeight: FONTS.weight.medium,
   },
   refreshBtn: {
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: COLORS.gray[100],
+    backgroundColor: THEME.colors.accentSoft,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -320,19 +320,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 11,
     paddingVertical: 6,
     borderRadius: THEME.radius.pill,
-    backgroundColor: COLORS.gray[100],
+    backgroundColor: THEME.colors.surface,
     borderWidth: 1,
-    borderColor: COLORS.gray[200],
+    borderColor: THEME.colors.border,
     maxWidth: 120,
   },
   chipSelected: {
-    backgroundColor: COLORS.primary,
-    borderColor: COLORS.primary,
+    backgroundColor: THEME.colors.accentDark,
+    borderColor: THEME.colors.accentDark,
   },
   chipText: {
     fontSize: FONTS.size.xs,
     fontWeight: FONTS.weight.medium,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
   },
   chipTextSelected: {
     color: COLORS.white,
@@ -344,33 +344,29 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 0,
-    bottom: 90,
+    bottom: 0,
     width: EDGE_WIDTH,
   },
   rightEdge: {
     position: 'absolute',
     right: 0,
     top: 0,
-    bottom: 90,
+    bottom: 0,
     width: EDGE_WIDTH,
   },
 
   // ── FAB ────────────────────────────────────────────────
   fab: {
     position: 'absolute',
-    bottom: 130,
+    bottom: 24,
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.primary,
+    backgroundColor: THEME.colors.accentDark,
     borderRadius: 28,
     paddingHorizontal: SPACING.lg,
     paddingVertical: 14,
-    shadowColor: COLORS.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.35,
-    shadowRadius: 8,
-    elevation: 6,
+    ...THEME.shadow.float,
   },
   fabText: {
     color: COLORS.white,
@@ -390,19 +386,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: 'rgba(255,255,255,0.92)',
-    borderRadius: 16,
+    backgroundColor: 'rgba(255,255,255,0.95)',
+    borderRadius: THEME.radius.md,
     paddingVertical: 12,
     paddingHorizontal: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.float,
   },
   emptyText: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     lineHeight: 18,
   },
 });

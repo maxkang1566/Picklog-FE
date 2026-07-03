@@ -372,12 +372,12 @@ export default function InstagramImportScreen({ navigation }: Props) {
             <Ionicons
               name={isSelected ? 'checkbox' : 'square-outline'}
               size={22}
-              color={isSelected ? COLORS.primary : COLORS.gray[400]}
+              color={isSelected ? COLORS.primary : THEME.colors.textPlaceholder}
             />
             <Ionicons
               name={storage.is_public ? 'people-outline' : 'lock-closed-outline'}
               size={15}
-              color={isSelected ? COLORS.primary : COLORS.gray[400]}
+              color={isSelected ? COLORS.primary : THEME.colors.textPlaceholder}
             />
             <View style={{ flex: 1 }}>
               <Text style={[styles.storageCheckText, isSelected && styles.storageCheckTextSelected]}>
@@ -432,13 +432,13 @@ export default function InstagramImportScreen({ navigation }: Props) {
               <View style={styles.section}>
                 <Text style={styles.label}>인스타그램 URL</Text>
                 <View style={styles.inputRow}>
-                  <Ionicons name="link-outline" size={16} color={COLORS.gray[400]} />
+                  <Ionicons name="link-outline" size={16} color={THEME.colors.textPlaceholder} />
                   <TextInput
                     style={styles.urlInput}
                     value={url}
                     onChangeText={setUrl}
                     placeholder="https://www.instagram.com/p/..."
-                    placeholderTextColor={COLORS.gray[400]}
+                    placeholderTextColor={THEME.colors.textPlaceholder}
                     autoCapitalize="none"
                     autoCorrect={false}
                     keyboardType="url"
@@ -446,7 +446,7 @@ export default function InstagramImportScreen({ navigation }: Props) {
                   />
                   {url.length > 0 && (
                     <TouchableOpacity onPress={() => setUrl('')} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
-                      <Ionicons name="close-circle" size={16} color={COLORS.gray[400]} />
+                      <Ionicons name="close-circle" size={16} color={THEME.colors.textPlaceholder} />
                     </TouchableOpacity>
                   )}
                 </View>
@@ -527,7 +527,7 @@ export default function InstagramImportScreen({ navigation }: Props) {
                 </View>
               ) : (
                 <View style={[styles.previewImage, styles.previewImagePlaceholder]}>
-                  <Ionicons name="image-outline" size={40} color={COLORS.gray[300]} />
+                  <Ionicons name="image-outline" size={40} color={THEME.colors.textPlaceholder} />
                 </View>
               )}
 
@@ -550,7 +550,7 @@ export default function InstagramImportScreen({ navigation }: Props) {
                 </View>
                 {crawlData?.caption ? (
                   <View style={styles.captionWrap}>
-                    <Ionicons name="chatbubble-outline" size={13} color={COLORS.gray[400]} />
+                    <Ionicons name="chatbubble-outline" size={13} color={THEME.colors.textPlaceholder} />
                     <Text style={styles.captionText} numberOfLines={3}>{crawlData.caption}</Text>
                   </View>
                 ) : null}
@@ -611,7 +611,7 @@ export default function InstagramImportScreen({ navigation }: Props) {
                 </View>
               ) : (
                 <View style={[styles.previewImage, styles.previewImagePlaceholder]}>
-                  <Ionicons name="image-outline" size={40} color={COLORS.gray[300]} />
+                  <Ionicons name="image-outline" size={40} color={THEME.colors.textPlaceholder} />
                 </View>
               )}
 
@@ -636,7 +636,7 @@ export default function InstagramImportScreen({ navigation }: Props) {
                 </View>
                 {crawlData?.caption ? (
                   <View style={styles.captionWrap}>
-                    <Ionicons name="chatbubble-outline" size={13} color={COLORS.gray[400]} />
+                    <Ionicons name="chatbubble-outline" size={13} color={THEME.colors.textPlaceholder} />
                     <Text style={styles.captionText} numberOfLines={3}>{crawlData.caption}</Text>
                   </View>
                 ) : null}
@@ -712,7 +712,7 @@ export default function InstagramImportScreen({ navigation }: Props) {
                       <Text style={styles.candidateCategory}>{c.category_group}</Text>
                     ) : null}
                   </View>
-                  <Ionicons name="chevron-forward" size={16} color={COLORS.gray[400]} />
+                  <Ionicons name="chevron-forward" size={16} color={THEME.colors.textPlaceholder} />
                 </TouchableOpacity>
               ))}
               <TouchableOpacity style={styles.cancelBtn} onPress={handleReset}>
@@ -739,7 +739,7 @@ export default function InstagramImportScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: THEME.colors.bgBot },
   flex: { flex: 1 },
-  content: { paddingHorizontal: SPACING.md, paddingTop: SPACING.md, paddingBottom: 60 },
+  content: { paddingHorizontal: SPACING.md, paddingTop: SPACING.md, paddingBottom: 40 },
   centerContainer: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: SPACING.xl, gap: SPACING.md },
 
   headerRow: { flexDirection: 'row', alignItems: 'center', gap: 14, marginBottom: 24 },
@@ -755,29 +755,29 @@ const styles = StyleSheet.create({
     padding: SPACING.md, marginBottom: SPACING.lg, ...THEME.shadow.soft,
   },
   infoTitle: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: THEME.colors.textMain, marginBottom: 3 },
-  infoSub: { fontSize: FONTS.size.xs, color: COLORS.gray[500] },
+  infoSub: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted },
 
   section: { marginBottom: SPACING.lg },
-  label: { fontSize: FONTS.size.sm, fontWeight: FONTS.weight.semibold, color: COLORS.gray[600], marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 },
+  label: { fontSize: FONTS.size.sm, fontWeight: FONTS.weight.semibold, color: THEME.colors.textSub, marginBottom: 8, marginLeft: 4 },
 
   inputRow: {
     flexDirection: 'row', alignItems: 'center', gap: 10,
-    backgroundColor: THEME.colors.surface, borderRadius: 12,
-    paddingHorizontal: 14, paddingVertical: 13, borderWidth: 1, borderColor: COLORS.gray[200],
+    backgroundColor: THEME.colors.surface, borderRadius: THEME.radius.button,
+    paddingHorizontal: 14, paddingVertical: 13, borderWidth: 1, borderColor: THEME.colors.border,
   },
   urlInput: { flex: 1, fontSize: FONTS.size.md, color: THEME.colors.textMain, padding: 0 },
 
   storageCheckItem: {
     flexDirection: 'row', alignItems: 'center', gap: 10,
-    backgroundColor: THEME.colors.surface, borderRadius: 12,
+    backgroundColor: THEME.colors.surface, borderRadius: THEME.radius.button,
     paddingHorizontal: 14, paddingVertical: 13,
-    borderWidth: 1.5, borderColor: COLORS.gray[200], marginBottom: 8,
+    borderWidth: 1.5, borderColor: THEME.colors.border, marginBottom: 8,
   },
   storageCheckItemSelected: {
-    borderColor: COLORS.primary, backgroundColor: '#EEF2FF',
+    borderColor: THEME.colors.accentDark, backgroundColor: THEME.colors.accentSoft,
   },
-  storageCheckText: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.medium, color: COLORS.gray[600] },
-  storageCheckTextSelected: { color: COLORS.primary, fontWeight: FONTS.weight.semibold },
+  storageCheckText: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.medium, color: THEME.colors.textSub },
+  storageCheckTextSelected: { color: THEME.colors.textMain, fontWeight: FONTS.weight.semibold },
   storageCheckSub: { fontSize: FONTS.size.xs, color: COLORS.success, marginTop: 1 },
 
   // ── 백그라운드 크롤링 안내 ─────────────────────────────────────────────────
@@ -788,7 +788,7 @@ const styles = StyleSheet.create({
   },
   backgroundedIconRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   backgroundedTitle: { fontSize: FONTS.size.lg, fontWeight: FONTS.weight.bold, color: THEME.colors.textMain },
-  backgroundedSub: { fontSize: FONTS.size.sm, color: COLORS.gray[500], textAlign: 'center', lineHeight: 20 },
+  backgroundedSub: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, textAlign: 'center', lineHeight: 20 },
 
   processingBox: {
     alignItems: 'center', gap: 14, paddingVertical: 40,
@@ -799,14 +799,14 @@ const styles = StyleSheet.create({
 
   errorBox: {
     flexDirection: 'row', alignItems: 'flex-start', gap: 10,
-    backgroundColor: '#FFF0F0', borderRadius: 10, padding: SPACING.md,
-    marginBottom: SPACING.md, borderWidth: 1, borderColor: '#FFCDD2',
+    backgroundColor: THEME.colors.heartBg, borderRadius: THEME.radius.sm, padding: SPACING.md,
+    marginBottom: SPACING.md,
   },
   errorText: { flex: 1, fontSize: FONTS.size.sm, color: COLORS.error, lineHeight: 20 },
 
   submitBtn: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-    gap: 8, backgroundColor: COLORS.primary, borderRadius: 12, paddingVertical: 15,
+    gap: 8, backgroundColor: THEME.colors.accentDark, borderRadius: THEME.radius.button, paddingVertical: 15,
     marginBottom: SPACING.sm,
   },
   submitBtnDisabled: { opacity: 0.45 },
@@ -814,11 +814,11 @@ const styles = StyleSheet.create({
 
   previewImageWrap: {
     borderRadius: THEME.radius.lg, overflow: 'hidden',
-    marginBottom: SPACING.md, backgroundColor: COLORS.gray[100],
+    marginBottom: SPACING.md, backgroundColor: THEME.colors.accentSoft,
     height: 220, position: 'relative',
   },
   previewImage: {
-    height: 220, backgroundColor: COLORS.gray[100],
+    height: 220, backgroundColor: THEME.colors.accentSoft,
   },
   previewImagePlaceholder: { width: '100%', alignItems: 'center', justifyContent: 'center', borderRadius: THEME.radius.lg, marginBottom: SPACING.md },
   previewDots: {
@@ -833,27 +833,27 @@ const styles = StyleSheet.create({
   previewCard: {
     backgroundColor: THEME.colors.surface, borderRadius: THEME.radius.lg,
     padding: SPACING.md, marginBottom: SPACING.md,
-    borderWidth: 1, borderColor: COLORS.gray[100], ...THEME.shadow.soft,
+    borderWidth: 1, borderColor: THEME.colors.border, ...THEME.shadow.soft,
   },
   previewCardHeader: { flexDirection: 'row', alignItems: 'flex-start', gap: 12, marginBottom: SPACING.sm },
   previewIconWrap: {
     width: 40, height: 40, borderRadius: 20,
-    backgroundColor: '#EEF2FF', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+    backgroundColor: THEME.colors.accentSoft, alignItems: 'center', justifyContent: 'center', flexShrink: 0,
   },
-  previewPlaceName: { fontSize: FONTS.size.lg, fontWeight: FONTS.weight.bold, color: THEME.colors.textMain, lineHeight: 24, marginBottom: 4 },
-  previewAddress: { fontSize: FONTS.size.sm, color: COLORS.gray[500], marginBottom: 2 },
+  previewPlaceName:{ fontSize: FONTS.size.lg, fontWeight: FONTS.weight.bold, color: THEME.colors.textMain, lineHeight: 24, marginBottom: 4 },
+  previewAddress: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, marginBottom: 2 },
   previewCategory: { fontSize: FONTS.size.xs, color: COLORS.primary, fontWeight: FONTS.weight.medium },
   captionWrap: {
     flexDirection: 'row', gap: 8, alignItems: 'flex-start',
-    backgroundColor: COLORS.gray[100], borderRadius: 10,
+    backgroundColor: THEME.colors.accentSoft, borderRadius: THEME.radius.sm,
     padding: SPACING.sm, marginBottom: SPACING.sm,
   },
-  captionText: { flex: 1, fontSize: FONTS.size.sm, color: COLORS.gray[600], lineHeight: 20 },
+  captionText: { flex: 1, fontSize: FONTS.size.sm, color: THEME.colors.textSub, lineHeight: 20 },
   dnaHint: {
     flexDirection: 'row', alignItems: 'center', gap: 6,
-    backgroundColor: '#EEF2FF', borderRadius: 8, paddingVertical: 8, paddingHorizontal: 10,
+    backgroundColor: THEME.colors.accentSoft, borderRadius: 8, paddingVertical: 8, paddingHorizontal: 10,
   },
-  dnaHintText: { fontSize: FONTS.size.xs, color: COLORS.primary, fontWeight: FONTS.weight.medium },
+  dnaHintText: { fontSize: FONTS.size.xs, color: THEME.colors.textSub, fontWeight: FONTS.weight.medium },
 
   switchCandidateBtn: {
     flexDirection: 'row', alignItems: 'center', gap: 6,
@@ -863,33 +863,33 @@ const styles = StyleSheet.create({
 
   selectionHeader: {
     flexDirection: 'row', alignItems: 'flex-start', gap: 12,
-    backgroundColor: '#EEF2FF', borderRadius: 12, padding: SPACING.md, marginBottom: SPACING.md,
+    backgroundColor: THEME.colors.accentSoft, borderRadius: THEME.radius.sm, padding: SPACING.md, marginBottom: SPACING.md,
   },
   selectionTitle: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.bold, color: THEME.colors.textMain, marginBottom: 3 },
-  selectionSub: { fontSize: FONTS.size.sm, color: COLORS.gray[600] },
+  selectionSub: { fontSize: FONTS.size.sm, color: THEME.colors.textSub },
   candidateItem: {
     flexDirection: 'row', alignItems: 'center', gap: SPACING.sm,
-    backgroundColor: THEME.colors.surface, borderRadius: 12,
+    backgroundColor: THEME.colors.surface, borderRadius: THEME.radius.sm,
     padding: SPACING.md, marginBottom: SPACING.sm,
-    borderWidth: 1, borderColor: COLORS.gray[100],
+    borderWidth: 1, borderColor: THEME.colors.border,
   },
-  candidateItemSelected: { borderColor: COLORS.primary, borderWidth: 2 },
+  candidateItemSelected: { borderColor: THEME.colors.accentDark, borderWidth: 2 },
   candidateIcon: {
     width: 36, height: 36, borderRadius: 18,
-    backgroundColor: '#EEF2FF', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+    backgroundColor: THEME.colors.accentSoft, alignItems: 'center', justifyContent: 'center', flexShrink: 0,
   },
   candidateInfo: { flex: 1 },
   candidateName: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: COLORS.black, marginBottom: 2 },
-  candidateAddr: { fontSize: FONTS.size.sm, color: COLORS.gray[500], marginBottom: 2 },
+  candidateAddr: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, marginBottom: 2 },
   candidateCategory: { fontSize: FONTS.size.xs, color: COLORS.primary, fontWeight: FONTS.weight.medium },
   cancelBtn: { alignItems: 'center', paddingVertical: 14, marginTop: SPACING.xs },
-  cancelBtnText: { fontSize: FONTS.size.sm, color: COLORS.gray[400], textDecorationLine: 'underline' },
+  cancelBtnText: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, textDecorationLine: 'underline' },
 
   doneIcon: { width: 88, height: 88, borderRadius: 44, backgroundColor: COLORS.primary, alignItems: 'center', justifyContent: 'center', marginBottom: SPACING.sm },
   doneTitle: { fontSize: 28, fontWeight: FONTS.weight.bold, color: THEME.colors.textMain, letterSpacing: -0.5 },
-  doneSub: { fontSize: FONTS.size.md, color: COLORS.gray[500], textAlign: 'center', lineHeight: 24, marginBottom: SPACING.md },
-  primaryBtn: { backgroundColor: COLORS.primary, borderRadius: 12, paddingVertical: 14, paddingHorizontal: 52 },
+  doneSub: { fontSize: FONTS.size.md, color: THEME.colors.textMuted, textAlign: 'center', lineHeight: 24, marginBottom: SPACING.md },
+  primaryBtn: { backgroundColor: THEME.colors.accentDark, borderRadius: THEME.radius.button, paddingVertical: 14, paddingHorizontal: 52 },
   primaryBtnText: { color: '#fff', fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold },
   ghostBtn: { paddingVertical: 10 },
-  ghostBtnText: { fontSize: FONTS.size.sm, color: COLORS.gray[400], textDecorationLine: 'underline' },
+  ghostBtnText: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, textDecorationLine: 'underline' },
 });

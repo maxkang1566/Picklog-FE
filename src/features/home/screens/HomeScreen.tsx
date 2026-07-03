@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: THEME.spacing.lg,
     paddingTop: THEME.spacing.sm,
-    paddingBottom: 140,
+    paddingBottom: THEME.spacing.xl,
   },
 
   topBar: {
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   },
 
   greeting: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: THEME.spacing.xl,
   },
   greetingLocation: {
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: THEME.font.weight.bold,
     color: THEME.colors.textMain,
-    textAlign: 'center',
+    textAlign: 'left',
     lineHeight: 36,
     letterSpacing: -0.5,
   },
@@ -335,18 +335,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   crawlErrorBanner: {
-    backgroundColor: '#FFF0F0',
-    borderBottomColor: '#FFCDD2',
+    backgroundColor: THEME.colors.heartBg,
+    borderBottomColor: THEME.colors.heart,
   },
 
   igBanner: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: THEME.colors.surface,
-    borderRadius: THEME.radius.lg,
+    borderRadius: THEME.radius.md,
     paddingVertical: 14,
     paddingHorizontal: THEME.spacing.md,
     marginBottom: THEME.spacing.lg,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
   igBannerLeft: {

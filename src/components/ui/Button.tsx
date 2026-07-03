@@ -64,7 +64,7 @@ export default function Button({
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: THEME.radius.pill,
+    borderRadius: THEME.radius.button,
     paddingVertical: 16,
     paddingHorizontal: 24,
     alignItems: 'center',

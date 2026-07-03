@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: '#000',
         shadowOffset: { width: 4, height: 0 },
-        shadowOpacity: 0.15,
+        shadowOpacity: 0.08,
         shadowRadius: 16,
       },
       android: { elevation: 16 },
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
   // 구분선
   divider: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: 'rgba(0,0,0,0.08)',
+    backgroundColor: THEME.colors.border,
     marginVertical: 8,
   },
 

@@ -16,13 +16,12 @@ import {
   SafeAreaView,
   Animated,
   ScrollView,
-  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/types';
 import { SpaceDNAResult } from '../../../types';
-import { THEME, COLORS, FONTS, SPACING } from '../../../constants';
+import { THEME, FONTS, SPACING, shadowStyle } from '../../../constants';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SpaceDNAQuiz'>;
 
@@ -270,7 +269,7 @@ const styles = StyleSheet.create({
   // 진행률
   progressTrack: {
     height: 4,
-    backgroundColor: COLORS.gray[200],
+    backgroundColor: THEME.colors.divider,
     marginHorizontal: SPACING.md,
     borderRadius: 2,
     overflow: 'hidden',
@@ -313,10 +312,9 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.lg,
     padding: SPACING.lg,
     marginBottom: SPACING.lg,
-    ...Platform.select({
-      native: THEME.shadow.soft,
-      web: THEME.shadowWeb.soft,
-    }),
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...shadowStyle('soft'),
   },
   questionNumber: {
     fontSize: FONTS.size.sm,
@@ -344,14 +342,14 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.md,
     padding: SPACING.md,
     borderWidth: 1.5,
-    borderColor: COLORS.gray[200],
+    borderColor: THEME.colors.border,
   },
   choiceCircle: {
     width: 22,
     height: 22,
     borderRadius: 11,
     borderWidth: 2,
-    borderColor: COLORS.gray[300],
+    borderColor: THEME.colors.border,
     alignItems: 'center',
     justifyContent: 'center',
   },

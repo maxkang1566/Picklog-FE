@@ -46,8 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 48,
     paddingHorizontal: 24,
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    borderRadius: THEME.radius.xl,
   },
   iconCircle: {
     width: 64,

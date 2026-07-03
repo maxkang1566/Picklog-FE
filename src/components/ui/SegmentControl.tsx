@@ -42,21 +42,19 @@ export default function SegmentControl({ options, selected, onChange }: Props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    borderRadius: THEME.radius.pill,
-    padding: 6,
+    backgroundColor: THEME.colors.tagBg,
+    borderRadius: THEME.radius.md,
+    padding: 4,
     alignSelf: 'center',
   },
   btn: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: THEME.radius.pill,
+    borderRadius: THEME.radius.sm,
   },
   btnActive: {
     backgroundColor: THEME.colors.surface,
     ...THEME.shadow.soft,
-    shadowOpacity: 0.05,
-    elevation: 2,
   },
   label: {
     fontSize: THEME.font.size.md,

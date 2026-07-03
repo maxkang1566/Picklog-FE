@@ -185,7 +185,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    ...THEME.shadow.float,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.soft,
   },
   pageTitle: {
     fontSize: THEME.font.size.xxl,
@@ -203,6 +205,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 16,
     marginBottom: 32,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
   profileImg: {
@@ -247,6 +251,8 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.lg,
     overflow: 'hidden',
     marginBottom: 24,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
 
@@ -260,7 +266,7 @@ const styles = StyleSheet.create({
   },
   itemBorder: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#F2F2F7',
+    borderBottomColor: THEME.colors.divider,
   },
   iconBox: {
     width: 32,

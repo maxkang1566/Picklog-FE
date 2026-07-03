@@ -1,8 +1,8 @@
 /**
  * src/features/auth/screens/LoginScreen.tsx
- * Variant 디자인 적용 로그인 화면
- * - 따뜻한 그라디언트 배경 + 블롭 장식
- * - pill 모양 인풋 + 검정 버튼
+ * 토스 스타일 로그인 화면
+ * - 연회색 플랫 배경 + 흰 카드
+ * - 라운드 사각 인풋 + 검정 버튼
  */
 
 import React, { useState } from 'react';
@@ -44,10 +44,6 @@ export default function LoginScreen({ navigation }: Props) {
 
   return (
     <SafeAreaView style={styles.safe}>
-      {/* 배경 블롭 장식 */}
-      <View style={[styles.blob, styles.blob1]} />
-      <View style={[styles.blob, styles.blob2]} />
-
       <KeyboardAvoidingView
         style={styles.flex}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -112,30 +108,8 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
     backgroundColor: THEME.colors.bgBot,
-    overflow: 'hidden',
   },
   flex: { flex: 1 },
-
-  // 배경 블롭
-  blob: {
-    position: 'absolute',
-    borderRadius: 999,
-    opacity: 0.6,
-  },
-  blob1: {
-    width: 300,
-    height: 300,
-    backgroundColor: '#FEE2E2',
-    top: -50,
-    right: -50,
-  },
-  blob2: {
-    width: 250,
-    height: 250,
-    backgroundColor: '#FEF3C7',
-    bottom: 100,
-    left: -80,
-  },
 
   // 콘텐츠
   content: {

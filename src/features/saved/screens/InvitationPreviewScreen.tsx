@@ -136,7 +136,7 @@ export default function InvitationPreviewScreen({ route, navigation }: Props) {
           </View>
         ) : error ? (
           <View style={styles.center}>
-            <Ionicons name="alert-circle-outline" size={64} color={COLORS.gray[300]} />
+            <Ionicons name="alert-circle-outline" size={64} color={THEME.colors.textPlaceholder} />
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
               <Text style={styles.backBtnText}>돌아가기</Text>
@@ -155,14 +155,14 @@ export default function InvitationPreviewScreen({ route, navigation }: Props) {
 
               <View style={styles.infoBox}>
                 <View style={styles.infoRow}>
-                  <Ionicons name="shield-checkmark-outline" size={16} color={COLORS.gray[500]} />
+                  <Ionicons name="shield-checkmark-outline" size={16} color={THEME.colors.textMuted} />
                   <Text style={styles.infoLabel}>권한</Text>
                   <Text style={styles.infoValue}>
                     {preview.role === 'editor' ? '편집자 (장소 추가·수정 가능)' : '뷰어 (조회만 가능)'}
                   </Text>
                 </View>
                 <View style={styles.infoRow}>
-                  <Ionicons name="time-outline" size={16} color={COLORS.gray[500]} />
+                  <Ionicons name="time-outline" size={16} color={THEME.colors.textMuted} />
                   <Text style={styles.infoLabel}>만료일</Text>
                   <Text style={styles.infoValue}>{formatDate(preview.expires_at)}</Text>
                 </View>
@@ -176,7 +176,7 @@ export default function InvitationPreviewScreen({ route, navigation }: Props) {
                 disabled={isDeclining || isAccepting}
               >
                 {isDeclining
-                  ? <ActivityIndicator size="small" color={COLORS.gray[600]} />
+                  ? <ActivityIndicator size="small" color={THEME.colors.textSub} />
                   : <Text style={styles.declineBtnText}>거절</Text>
                 }
               </TouchableOpacity>
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray[100],
+    borderBottomColor: THEME.colors.divider,
   },
   headerTitle: {
     fontSize: FONTS.size.lg,
@@ -219,11 +219,11 @@ const styles = StyleSheet.create({
   content: { flex: 1, padding: SPACING.lg },
 
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: SPACING.md },
-  loadingText: { fontSize: FONTS.size.md, color: COLORS.gray[500] },
+  loadingText: { fontSize: FONTS.size.md, color: THEME.colors.textMuted },
   errorText: {
     fontSize: FONTS.size.lg,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
     textAlign: 'center',
     lineHeight: 26,
   },
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#EEF2FF',
+    backgroundColor: THEME.colors.accentSoft,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     gap: SPACING.sm,
   },
   infoRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  infoLabel: { fontSize: FONTS.size.sm, color: COLORS.gray[500], width: 40 },
+  infoLabel: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, width: 40 },
   infoValue: { flex: 1, fontSize: FONTS.size.sm, color: COLORS.black, fontWeight: FONTS.weight.medium },
 
   actions: {
@@ -270,21 +270,20 @@ const styles = StyleSheet.create({
   declineBtn: {
     flex: 1,
     paddingVertical: 14,
-    borderRadius: THEME.radius.md,
-    borderWidth: 1.5,
-    borderColor: COLORS.gray[300],
+    borderRadius: THEME.radius.button,
+    backgroundColor: THEME.colors.accentSoft,
     alignItems: 'center',
   },
   declineBtnText: {
     fontSize: FONTS.size.md,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
   },
   acceptBtn: {
     flex: 2,
     paddingVertical: 14,
-    borderRadius: THEME.radius.md,
-    backgroundColor: COLORS.primary,
+    borderRadius: THEME.radius.button,
+    backgroundColor: THEME.colors.accentDark,
     alignItems: 'center',
   },
   acceptBtnText: {
@@ -296,9 +295,9 @@ const styles = StyleSheet.create({
   backBtn: {
     paddingVertical: 12,
     paddingHorizontal: SPACING.lg,
-    borderRadius: THEME.radius.md,
+    borderRadius: THEME.radius.button,
     borderWidth: 1,
-    borderColor: COLORS.gray[300],
+    borderColor: THEME.colors.border,
   },
-  backBtnText: { fontSize: FONTS.size.md, color: COLORS.gray[600] },
+  backBtnText: { fontSize: FONTS.size.md, color: THEME.colors.textSub },
 });

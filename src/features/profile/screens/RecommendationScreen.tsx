@@ -63,10 +63,9 @@ const chipStyles = StyleSheet.create({
     borderRadius: THEME.radius.md,
     backgroundColor: THEME.colors.surface,
     borderWidth: 1.5,
-    borderColor: THEME.colors.tagBg,
+    borderColor: THEME.colors.border,
     alignItems: 'center',
     minWidth: 72,
-    ...THEME.shadow.soft,
   },
   key: {
     fontSize: THEME.font.size.md,
@@ -255,7 +254,7 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: THEME.spacing.lg,
     paddingTop: THEME.spacing.md,
-    paddingBottom: 60,
+    paddingBottom: THEME.spacing.xl,
   },
 
   headerRow: {
@@ -271,7 +270,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    ...THEME.shadow.float,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.soft,
   },
   pageTitle: {
     fontSize: THEME.font.size.xxl,
@@ -292,6 +293,8 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.lg,
     padding: THEME.spacing.lg,
     marginBottom: THEME.spacing.lg,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
   filterLabel: {
@@ -340,7 +343,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: '#FFF0F0',
+    backgroundColor: THEME.colors.heartBg,
     borderRadius: THEME.radius.md,
     padding: THEME.spacing.md,
     marginBottom: THEME.spacing.md,
@@ -354,7 +357,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     backgroundColor: THEME.colors.error,
-    borderRadius: THEME.radius.pill,
+    borderRadius: THEME.radius.button,
   },
   retryText: {
     fontSize: THEME.font.size.xs,

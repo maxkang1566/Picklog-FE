@@ -131,17 +131,17 @@ const SpotCard = memo(function SpotCard({ spot, onPress, onDelete, onVisit, isVi
               <Ionicons
                 name={visited ? 'checkmark-circle' : 'checkmark-circle-outline'}
                 size={22}
-                color={visited ? '#34C759' : COLORS.gray[400]}
+                color={visited ? THEME.colors.iosGreen : THEME.colors.textPlaceholder}
               />
             </TouchableOpacity>
           )
         )}
         {onDelete ? (
           <TouchableOpacity onPress={onDelete} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
-            <Ionicons name="trash-outline" size={16} color={COLORS.gray[400]} />
+            <Ionicons name="trash-outline" size={16} color={THEME.colors.textPlaceholder} />
           </TouchableOpacity>
         ) : (
-          <Ionicons name="chevron-forward" size={16} color={COLORS.gray[400]} />
+          <Ionicons name="chevron-forward" size={16} color={THEME.colors.textPlaceholder} />
         )}
       </View>
     </TouchableOpacity>
@@ -152,19 +152,19 @@ const spotCardStyles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
+    backgroundColor: THEME.colors.surface,
+    borderRadius: THEME.radius.sm,
     padding: SPACING.md,
     marginBottom: SPACING.sm,
     borderWidth: 1,
-    borderColor: COLORS.gray[100],
+    borderColor: THEME.colors.border,
     gap: SPACING.sm,
   },
   iconWrap: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#EEF2FF',
+    backgroundColor: THEME.colors.accentSoft,
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
@@ -174,7 +174,7 @@ const spotCardStyles = StyleSheet.create({
     height: 48,
     borderRadius: 10,
     flexShrink: 0,
-    backgroundColor: COLORS.gray[100],
+    backgroundColor: THEME.colors.accentSoft,
   },
   info: { flex: 1 },
   nameRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 2 },
@@ -182,7 +182,7 @@ const spotCardStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 2,
-    backgroundColor: '#34C759',
+    backgroundColor: THEME.colors.iosGreen,
     borderRadius: 6,
     paddingHorizontal: 5,
     paddingVertical: 1,
@@ -199,7 +199,7 @@ const spotCardStyles = StyleSheet.create({
   },
   address: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     marginBottom: 2,
   },
   category: {
@@ -209,7 +209,7 @@ const spotCardStyles = StyleSheet.create({
   },
   memo: {
     fontSize: FONTS.size.xs,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     marginTop: 2,
   },
   igTag: {
@@ -254,7 +254,7 @@ const FolderChip = memo(function FolderChip({ folder, selected, onPress, onLongP
       <Ionicons
         name={folder.icon}
         size={13}
-        color={selected ? COLORS.white : COLORS.gray[500]}
+        color={selected ? '#fff' : THEME.colors.textMuted}
       />
       <Text style={[chipStyles.label, selected && chipStyles.labelSelected]}>
         {folder.label}
@@ -271,21 +271,21 @@ const chipStyles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 7,
     borderRadius: THEME.radius.pill,
-    backgroundColor: COLORS.gray[100],
+    backgroundColor: THEME.colors.surface,
     borderWidth: 1,
-    borderColor: COLORS.gray[200],
+    borderColor: THEME.colors.border,
   },
   chipSelected: {
-    backgroundColor: COLORS.primary,
-    borderColor: COLORS.primary,
+    backgroundColor: THEME.colors.accentDark,
+    borderColor: THEME.colors.accentDark,
   },
   label: {
     fontSize: FONTS.size.sm,
     fontWeight: FONTS.weight.medium,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
   },
   labelSelected: {
-    color: COLORS.white,
+    color: '#fff',
     fontWeight: FONTS.weight.semibold,
   },
 });
@@ -585,7 +585,7 @@ export default function SavedListScreen() {
           <Text style={styles.headerTitle}>저장한 공간</Text>
           <View style={styles.headerRight}>
             {(isLoading || isLoadingSpots || isLoadingAll) && (
-              <ActivityIndicator size="small" color={COLORS.gray[400]} style={{ marginRight: 8 }} />
+              <ActivityIndicator size="small" color={THEME.colors.textPlaceholder} style={{ marginRight: 8 }} />
             )}
             <Text style={styles.countText}>
               {selectedFolderId === 'all' ? allSpots.length : spots.length}개
@@ -707,7 +707,7 @@ export default function SavedListScreen() {
               renderItem={renderStorageSpotItem}
               ListEmptyComponent={
                 <View style={styles.emptyContainer}>
-                  <Ionicons name="bookmark-outline" size={56} color={COLORS.gray[300]} />
+                  <Ionicons name="bookmark-outline" size={56} color={THEME.colors.textPlaceholder} />
                   <Text style={styles.emptyTitle}>보관함이 비어있어요</Text>
                   <Text style={styles.emptySubtitle}>
                     {`${selectedFolder.label}에\n장소를 추가해보세요`}
@@ -731,7 +731,7 @@ export default function SavedListScreen() {
               renderItem={renderAllSpotItem}
               ListEmptyComponent={
                 <View style={styles.emptyContainer}>
-                  <Ionicons name="bookmark-outline" size={56} color={COLORS.gray[300]} />
+                  <Ionicons name="bookmark-outline" size={56} color={THEME.colors.textPlaceholder} />
                   <Text style={styles.emptyTitle}>저장한 공간이 없어요</Text>
                   <Text style={styles.emptySubtitle}>
                     지도에서 장소를 검색해{'\n'}보관함에 저장해보세요
@@ -761,7 +761,7 @@ export default function SavedListScreen() {
               value={newTitle}
               onChangeText={setNewTitle}
               placeholder="보관함 이름을 입력해주세요"
-              placeholderTextColor={COLORS.gray[400]}
+              placeholderTextColor={THEME.colors.textPlaceholder}
               autoFocus
               maxLength={30}
             />
@@ -813,7 +813,7 @@ export default function SavedListScreen() {
               value={inviteToken}
               onChangeText={setInviteToken}
               placeholder="초대 토큰을 붙여넣으세요"
-              placeholderTextColor={COLORS.gray[400]}
+              placeholderTextColor={THEME.colors.textPlaceholder}
               autoFocus
               autoCapitalize="none"
               autoCorrect={false}
@@ -863,7 +863,7 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.md,
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray[200],
+    borderBottomColor: THEME.colors.divider,
   },
   headerTitle: {
     fontSize: FONTS.size.xl,
@@ -877,7 +877,7 @@ const styles = StyleSheet.create({
   },
   countText: {
     fontSize: FONTS.size.md,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     fontWeight: FONTS.weight.medium,
   },
   inviteButton: {
@@ -901,7 +901,7 @@ const styles = StyleSheet.create({
   folderBarWrap: {
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray[200],
+    borderBottomColor: THEME.colors.divider,
   },
   folderBar: {
     paddingHorizontal: SPACING.md,
@@ -935,13 +935,13 @@ const styles = StyleSheet.create({
   },
   dnaAxisLabel: {
     fontSize: 9,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     fontWeight: FONTS.weight.medium,
   },
   dnaAxisBar: {
     height: 4,
     borderRadius: 99,
-    backgroundColor: 'rgba(0,0,0,0.08)',
+    backgroundColor: THEME.colors.border,
     overflow: 'hidden',
   },
   dnaAxisFill: {
@@ -957,7 +957,7 @@ const styles = StyleSheet.create({
   },
   dnaCountText: {
     fontSize: 9,
-    color: COLORS.gray[400],
+    color: THEME.colors.textPlaceholder,
     alignSelf: 'flex-end',
     marginLeft: 2,
   },
@@ -982,7 +982,7 @@ const styles = StyleSheet.create({
 
   listContent: {
     padding: SPACING.md,
-    paddingBottom: SPACING.xxl,
+    paddingBottom: SPACING.lg,
   },
   emptyContainer: {
     alignItems: 'center',
@@ -992,11 +992,11 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: FONTS.size.lg,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[700],
+    color: THEME.colors.textSub,
   },
   emptySubtitle: {
     fontSize: FONTS.size.md,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     textAlign: 'center',
     lineHeight: 22,
   },
@@ -1027,12 +1027,12 @@ const modalStyles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: COLORS.gray[200],
-    borderRadius: THEME.radius.sm,
+    borderColor: THEME.colors.border,
+    borderRadius: THEME.radius.button,
     padding: SPACING.md,
     fontSize: FONTS.size.md,
-    color: COLORS.black,
-    backgroundColor: COLORS.gray[100],
+    color: THEME.colors.textMain,
+    backgroundColor: THEME.colors.bgMid,
   },
   buttons: {
     flexDirection: 'row',
@@ -1041,21 +1041,20 @@ const modalStyles = StyleSheet.create({
   cancelBtn: {
     flex: 1,
     paddingVertical: 12,
-    borderRadius: THEME.radius.sm,
-    borderWidth: 1,
-    borderColor: COLORS.gray[300],
+    borderRadius: THEME.radius.button,
+    backgroundColor: THEME.colors.accentSoft,
     alignItems: 'center',
   },
   cancelText: {
     fontSize: FONTS.size.md,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
     fontWeight: FONTS.weight.medium,
   },
   createBtn: {
     flex: 1,
     paddingVertical: 12,
-    borderRadius: THEME.radius.sm,
-    backgroundColor: COLORS.primary,
+    borderRadius: THEME.radius.button,
+    backgroundColor: THEME.colors.accentDark,
     alignItems: 'center',
   },
   createText: {
@@ -1070,11 +1069,11 @@ const modalStyles = StyleSheet.create({
   },
   inviteDesc: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     lineHeight: 20,
   },
   inviteExample: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[400],
+    color: THEME.colors.textPlaceholder,
   },
 });

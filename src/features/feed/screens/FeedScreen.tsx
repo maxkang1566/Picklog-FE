@@ -183,7 +183,7 @@ function FeedCard({ item, onPlacePress }: { item: FeedItem; onPlacePress: (id: s
               ))}
             </View>
           </View>
-          <Ionicons name="chevron-forward" size={16} color={COLORS.gray[400]} />
+          <Ionicons name="chevron-forward" size={16} color={THEME.colors.textPlaceholder} />
         </TouchableOpacity>
       )}
     </View>
@@ -234,7 +234,7 @@ export default function FeedScreen() {
           <View style={styles.groupCountBadge}>
             <Text style={styles.groupCountText}>{MOCK_GROUPS.length}개 그룹</Text>
           </View>
-          <Ionicons name="chevron-forward" size={16} color={COLORS.gray[400]} />
+          <Ionicons name="chevron-forward" size={16} color={THEME.colors.textPlaceholder} />
         </TouchableOpacity>
       </View>
 
@@ -253,7 +253,7 @@ export default function FeedScreen() {
         }
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Ionicons name="people-outline" size={48} color={COLORS.gray[300]} />
+            <Ionicons name="people-outline" size={48} color={THEME.colors.textPlaceholder} />
             <Text style={styles.emptyTitle}>아직 친구 활동이 없어요</Text>
             <Text style={styles.emptyDesc}>친구를 추가하면 친구의 공간 기록을{'\n'}여기서 볼 수 있어요</Text>
           </View>
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.sm,
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray[200],
+    borderBottomColor: THEME.colors.divider,
   },
   headerTitle: {
     fontSize: FONTS.size.xl,
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.sm,
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray[200],
+    borderBottomColor: THEME.colors.divider,
   },
   groupBanner: {
     flexDirection: 'row',
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   },
   groupBannerSub: {
     fontSize: FONTS.size.xs,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
   },
   groupCountBadge: {
     backgroundColor: COLORS.white,
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
   groupCountText: {
     fontSize: FONTS.size.xs,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
   },
   list: {
     padding: SPACING.md,
@@ -343,14 +343,12 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: COLORS.white,
-    borderRadius: 12,
+    borderRadius: THEME.radius.sm,
     padding: SPACING.md,
     gap: SPACING.sm,
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.soft,
   },
   cardHeader: {
     flexDirection: 'row',
@@ -385,7 +383,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: FONTS.size.xs,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     marginTop: 1,
   },
   activityBadge: {
@@ -397,7 +395,7 @@ const styles = StyleSheet.create({
   },
   activityText: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[700],
+    color: THEME.colors.textSub,
     lineHeight: 20,
   },
   placePreview: {
@@ -419,7 +417,7 @@ const styles = StyleSheet.create({
   },
   placeAddress: {
     fontSize: FONTS.size.xs,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
   },
   tagRow: {
     flexDirection: 'row',
@@ -447,11 +445,11 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: FONTS.size.lg,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
   },
   emptyDesc: {
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[400],
+    color: THEME.colors.textPlaceholder,
     textAlign: 'center',
     lineHeight: 20,
   },

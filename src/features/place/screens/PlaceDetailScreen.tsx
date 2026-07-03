@@ -148,7 +148,7 @@ export default function PlaceDetailScreen({ route, navigation }: Props) {
             </ScrollView>
           ) : (
             <View style={[styles.image, styles.imagePlaceholder]}>
-              <Ionicons name="location" size={48} color={COLORS.gray[300]} />
+              <Ionicons name="location" size={48} color={THEME.colors.textPlaceholder} />
             </View>
           )}
           {/* 뒤로가기 */}
@@ -189,7 +189,7 @@ export default function PlaceDetailScreen({ route, navigation }: Props) {
                 <Ionicons
                   name={saved ? 'bookmark' : 'bookmark-outline'}
                   size={24}
-                  color={saved ? COLORS.primary : COLORS.gray[600]}
+                  color={saved ? COLORS.primary : THEME.colors.textSub}
                 />
               </TouchableOpacity>
             )}
@@ -204,14 +204,14 @@ export default function PlaceDetailScreen({ route, navigation }: Props) {
 
           {/* 주소 */}
           <View style={styles.infoRow}>
-            <Ionicons name="location-outline" size={16} color={COLORS.gray[500]} />
+            <Ionicons name="location-outline" size={16} color={THEME.colors.textMuted} />
             <Text style={styles.address}>{displayAddress}</Text>
           </View>
 
           {/* 전화번호 (API 모드) */}
           {displayPhone ? (
             <View style={styles.infoRow}>
-              <Ionicons name="call-outline" size={16} color={COLORS.gray[500]} />
+              <Ionicons name="call-outline" size={16} color={THEME.colors.textMuted} />
               <Text style={styles.infoText}>{displayPhone}</Text>
             </View>
           ) : null}
@@ -219,7 +219,7 @@ export default function PlaceDetailScreen({ route, navigation }: Props) {
           {/* 홈페이지 (API 모드) */}
           {displayUrl ? (
             <View style={styles.infoRow}>
-              <Ionicons name="globe-outline" size={16} color={COLORS.gray[500]} />
+              <Ionicons name="globe-outline" size={16} color={THEME.colors.textMuted} />
               <Text style={styles.infoText} numberOfLines={1}>{displayUrl}</Text>
             </View>
           ) : null}
@@ -228,7 +228,7 @@ export default function PlaceDetailScreen({ route, navigation }: Props) {
           {!isApiMode && mockPlace && (
             <>
               <View style={styles.infoRow}>
-                <Ionicons name="bookmark-outline" size={16} color={COLORS.gray[500]} />
+                <Ionicons name="bookmark-outline" size={16} color={THEME.colors.textMuted} />
                 <Text style={styles.infoText}>{mockPlace.saveCount.toLocaleString()}명이 저장</Text>
               </View>
               <View style={styles.tagsContainer}>
@@ -428,7 +428,7 @@ export default function PlaceDetailScreen({ route, navigation }: Props) {
 
             {storages.length === 0 ? (
               <View style={modalStyles.emptyWrap}>
-                <Ionicons name="folder-open-outline" size={40} color={COLORS.gray[300]} />
+                <Ionicons name="folder-open-outline" size={40} color={THEME.colors.textPlaceholder} />
                 <Text style={modalStyles.emptyText}>보관함이 없습니다.{'\n'}저장한 공간 탭에서 먼저 보관함을 만들어주세요.</Text>
               </View>
             ) : (
@@ -457,7 +457,7 @@ export default function PlaceDetailScreen({ route, navigation }: Props) {
                     </View>
                     {isSaving
                       ? <ActivityIndicator size="small" color={COLORS.primary} />
-                      : <Ionicons name="chevron-forward" size={16} color={COLORS.gray[400]} />
+                      : <Ionicons name="chevron-forward" size={16} color={THEME.colors.textPlaceholder} />
                     }
                   </TouchableOpacity>
                 )}
@@ -480,7 +480,7 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: COLORS.white },
   imageContainer: { position: 'relative', height: 260 },
   imageSlider: { height: 260 },
-  image: { height: 260, backgroundColor: COLORS.gray[200] },
+  image: { height: 260, backgroundColor: THEME.colors.accentSoft },
   imagePlaceholder: { width: '100%', alignItems: 'center', justifyContent: 'center' },
   dotsContainer: {
     position: 'absolute', bottom: 10, left: 0, right: 0,
@@ -525,21 +525,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center',
     gap: 6, marginBottom: 8,
   },
-  address: { fontSize: FONTS.size.md, color: COLORS.gray[600], flex: 1 },
-  infoText: { fontSize: FONTS.size.sm, color: COLORS.gray[500], flex: 1 },
+  address: { fontSize: FONTS.size.md, color: THEME.colors.textSub, flex: 1 },
+  infoText: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, flex: 1 },
   tagsContainer: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginVertical: SPACING.md },
   tag: { backgroundColor: COLORS.primaryLight, borderRadius: 14, paddingHorizontal: 12, paddingVertical: 6 },
   tagText: { fontSize: FONTS.size.sm, color: COLORS.primary, fontWeight: FONTS.weight.medium },
   descriptionContainer: { marginBottom: SPACING.md },
   descriptionTitle: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: COLORS.black, marginBottom: SPACING.sm },
-  description: { fontSize: FONTS.size.md, color: COLORS.gray[700], lineHeight: 24 },
+  description: { fontSize: FONTS.size.md, color: THEME.colors.textSub, lineHeight: 24 },
   aiSection: { backgroundColor: COLORS.primaryLight, borderRadius: 12, padding: SPACING.md, marginBottom: SPACING.md },
   aiSectionHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 6 },
   aiSectionTitle: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: COLORS.primary, flex: 1 },
-  comingSoon: { fontSize: FONTS.size.xs, color: COLORS.gray[500], backgroundColor: COLORS.white, paddingHorizontal: 8, paddingVertical: 2, borderRadius: 8 },
-  aiSectionDesc: { fontSize: FONTS.size.sm, color: COLORS.gray[600], lineHeight: 20 },
-  sourceText: { fontSize: FONTS.size.xs, color: COLORS.gray[400], marginTop: SPACING.sm },
-  dnaSection: { backgroundColor: COLORS.gray[100], borderRadius: 12, padding: SPACING.md, marginBottom: SPACING.md },
+  comingSoon: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted, backgroundColor: COLORS.white, paddingHorizontal: 8, paddingVertical: 2, borderRadius: 8 },
+  aiSectionDesc: { fontSize: FONTS.size.sm, color: THEME.colors.textSub, lineHeight: 20 },
+  sourceText: { fontSize: FONTS.size.xs, color: THEME.colors.textPlaceholder, marginTop: SPACING.sm },
+  dnaSection: { backgroundColor: THEME.colors.accentSoft, borderRadius: THEME.radius.sm, padding: SPACING.md, marginBottom: SPACING.md },
   dnaSectionHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
   dnaSectionTitle: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: COLORS.primary, flex: 1 },
   dnaCodeBadge: { backgroundColor: COLORS.primary, borderRadius: 8, paddingHorizontal: 10, paddingVertical: 3 },
@@ -547,14 +547,14 @@ const styles = StyleSheet.create({
   dnaAxesRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   dnaAxisChip: { flex: 1, alignItems: 'center', backgroundColor: COLORS.white, borderRadius: 10, paddingVertical: 10, paddingHorizontal: 4 },
   dnaAxisKey: { fontSize: FONTS.size.xl, fontWeight: FONTS.weight.bold, color: COLORS.black, lineHeight: 26 },
-  dnaAxisName: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.medium, color: COLORS.gray[700], marginTop: 2 },
-  dnaAxisLabel: { fontSize: FONTS.size.xs, color: COLORS.gray[400], marginTop: 1 },
-  dnaAxisDivider: { fontSize: 18, color: COLORS.gray[300], marginHorizontal: 6 },
-  dnaAxisBarTrack: { width: '100%', height: 4, borderRadius: 99, backgroundColor: COLORS.gray[200], overflow: 'hidden', marginTop: 6 },
+  dnaAxisName: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.medium, color: THEME.colors.textSub, marginTop: 2 },
+  dnaAxisLabel: { fontSize: FONTS.size.xs, color: THEME.colors.textPlaceholder, marginTop: 1 },
+  dnaAxisDivider: { fontSize: 18, color: THEME.colors.textPlaceholder, marginHorizontal: 6 },
+  dnaAxisBarTrack: { width: '100%', height: 4, borderRadius: 99, backgroundColor: THEME.colors.border, overflow: 'hidden', marginTop: 6 },
   dnaAxisBarFill: { height: '100%', borderRadius: 99 },
-  dnaAxisPct: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.bold, color: COLORS.gray[700], marginTop: 3 },
-  dnaFallbackText: { fontSize: FONTS.size.sm, color: COLORS.gray[500], marginTop: 6, lineHeight: 20 },
-  dnaAiSummary: { fontSize: FONTS.size.sm, color: COLORS.gray[700], lineHeight: 20, marginBottom: 12 },
+  dnaAxisPct: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.bold, color: THEME.colors.textSub, marginTop: 3 },
+  dnaFallbackText: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, marginTop: 6, lineHeight: 20 },
+  dnaAiSummary: { fontSize: FONTS.size.sm, color: THEME.colors.textSub, lineHeight: 20, marginBottom: 12 },
 
   // 보관함 저장 바
   saveBarWrap: {
@@ -564,14 +564,14 @@ const styles = StyleSheet.create({
     paddingTop: SPACING.sm,
     paddingBottom: Platform.OS === 'ios' ? 28 : 16,
     borderTopWidth: 1,
-    borderTopColor: COLORS.gray[100],
+    borderTopColor: THEME.colors.divider,
   },
   saveBar: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
     gap: 8, backgroundColor: COLORS.primary,
     borderRadius: 14, paddingVertical: 14,
   },
-  saveBarSaved: { backgroundColor: COLORS.gray[400] },
+  saveBarSaved: { backgroundColor: THEME.colors.textPlaceholder },
   saveBarText: { fontSize: FONTS.size.lg, fontWeight: FONTS.weight.bold, color: COLORS.white },
 });
 
@@ -588,7 +588,7 @@ const modalStyles = StyleSheet.create({
   },
   handle: {
     width: 40, height: 4, borderRadius: 2,
-    backgroundColor: COLORS.gray[300],
+    backgroundColor: THEME.colors.border,
     alignSelf: 'center', marginBottom: 16,
   },
   title: {
@@ -597,11 +597,11 @@ const modalStyles = StyleSheet.create({
   },
   list: { maxHeight: 300 },
   emptyWrap: { alignItems: 'center', paddingVertical: 32, gap: 12, paddingHorizontal: SPACING.lg },
-  emptyText: { fontSize: FONTS.size.md, color: COLORS.gray[500], textAlign: 'center', lineHeight: 22 },
+  emptyText: { fontSize: FONTS.size.md, color: THEME.colors.textMuted, textAlign: 'center', lineHeight: 22 },
   storageItem: {
     flexDirection: 'row', alignItems: 'center',
     paddingHorizontal: SPACING.lg, paddingVertical: 14,
-    borderBottomWidth: 1, borderBottomColor: COLORS.gray[100],
+    borderBottomWidth: 1, borderBottomColor: THEME.colors.divider,
     gap: SPACING.md,
   },
   storageIcon: {
@@ -612,12 +612,12 @@ const modalStyles = StyleSheet.create({
   },
   storageInfo: { flex: 1 },
   storageTitle: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: COLORS.black },
-  storageMeta: { fontSize: FONTS.size.sm, color: COLORS.gray[500], marginTop: 2 },
+  storageMeta: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, marginTop: 2 },
   cancelBtn: {
     marginTop: SPACING.md, marginHorizontal: SPACING.lg,
-    paddingVertical: 12, borderRadius: 10,
-    borderWidth: 1, borderColor: COLORS.gray[300],
+    paddingVertical: 12, borderRadius: THEME.radius.button,
+    borderWidth: 1, borderColor: THEME.colors.border,
     alignItems: 'center',
   },
-  cancelText: { fontSize: FONTS.size.md, color: COLORS.gray[600], fontWeight: FONTS.weight.medium },
+  cancelText: { fontSize: FONTS.size.md, color: THEME.colors.textSub, fontWeight: FONTS.weight.medium },
 });

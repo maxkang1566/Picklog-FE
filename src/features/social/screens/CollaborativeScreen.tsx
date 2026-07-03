@@ -22,7 +22,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import { RootStackParamList } from '../../../navigation/types';
-import { COLORS, FONTS, SPACING, THEME } from '../../../constants';
+import { FONTS, SPACING, THEME } from '../../../constants';
 import { MOCK_GROUPS, Group } from '../../../services/mock/mockGroups';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CollaborativeMap'>;
@@ -62,19 +62,19 @@ function MiniBar({ label, leftKey, rightKey, leftValue, rightValue, leftColor, r
 const miniBarStyles = StyleSheet.create({
   wrap: { marginBottom: 10 },
   row: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 },
-  label: { fontSize: FONTS.size.xs, color: COLORS.gray[600], fontWeight: FONTS.weight.medium },
-  dominant: { fontSize: FONTS.size.xs, color: COLORS.gray[400] },
+  label: { fontSize: FONTS.size.xs, color: THEME.colors.textSub, fontWeight: FONTS.weight.medium },
+  dominant: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted },
   track: {
     flexDirection: 'row',
     height: 6,
     borderRadius: 99,
     overflow: 'hidden',
-    backgroundColor: COLORS.gray[200],
+    backgroundColor: THEME.colors.divider,
     marginBottom: 3,
   },
   fill: { height: '100%' },
   labels: { flexDirection: 'row', justifyContent: 'space-between' },
-  pct: { fontSize: FONTS.size.xs, color: COLORS.gray[500] },
+  pct: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted },
 });
 
 // ─── 멤버 아바타 목록 ────────────────────────────────────
@@ -105,12 +105,12 @@ const avatarStyles = StyleSheet.create({
     borderRadius: 14,
     backgroundColor: THEME.colors.accentSoft,
     borderWidth: 2,
-    borderColor: COLORS.white,
+    borderColor: THEME.colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  initial: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.bold, color: COLORS.gray[700] },
-  names: { fontSize: FONTS.size.xs, color: COLORS.gray[500], marginLeft: 10 },
+  initial: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.bold, color: THEME.colors.textSub },
+  names: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted, marginLeft: 10 },
 });
 
 // ─── 그룹 카드 ───────────────────────────────────────────
@@ -137,7 +137,7 @@ function GroupCard({ group, onPress }: { group: Group; onPress: () => void }) {
         <Ionicons
           name={expanded ? 'chevron-up' : 'chevron-down'}
           size={16}
-          color={COLORS.gray[400]}
+          color={THEME.colors.textMuted}
         />
       </TouchableOpacity>
 
@@ -176,7 +176,7 @@ function GroupCard({ group, onPress }: { group: Group; onPress: () => void }) {
 
       {/* 공간 보기 버튼 */}
       <TouchableOpacity style={cardStyles.viewBtn} onPress={onPress} activeOpacity={0.85}>
-        <Ionicons name="map-outline" size={14} color={COLORS.primary} />
+        <Ionicons name="map-outline" size={14} color={THEME.colors.accentDark} />
         <Text style={cardStyles.viewBtnText}>공동 저장 공간 보기</Text>
       </TouchableOpacity>
     </View>
@@ -185,15 +185,13 @@ function GroupCard({ group, onPress }: { group: Group; onPress: () => void }) {
 
 const cardStyles = StyleSheet.create({
   card: {
-    backgroundColor: COLORS.white,
-    borderRadius: 16,
+    backgroundColor: THEME.colors.surface,
+    borderRadius: THEME.radius.md,
     padding: SPACING.md,
     marginBottom: SPACING.md,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.soft,
   },
   header: {
     flexDirection: 'row',
@@ -203,35 +201,35 @@ const cardStyles = StyleSheet.create({
   },
   emoji: { fontSize: 28 },
   headerTexts: { flex: 1 },
-  name: { fontSize: FONTS.size.lg, fontWeight: FONTS.weight.bold, color: COLORS.black, marginBottom: 2 },
-  desc: { fontSize: FONTS.size.sm, color: COLORS.gray[500] },
+  name: { fontSize: FONTS.size.lg, fontWeight: FONTS.weight.bold, color: THEME.colors.textMain, marginBottom: 2 },
+  desc: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted },
   placeBadge: {
     backgroundColor: THEME.colors.accentSoft,
-    borderRadius: 8,
+    borderRadius: THEME.radius.pill,
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  placeCount: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.semibold, color: COLORS.gray[700] },
+  placeCount: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.semibold, color: THEME.colors.textSub },
   dnaSummaryRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 4 },
   dnaCodeBadge: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: THEME.colors.accentDark,
     borderRadius: 6,
     paddingHorizontal: 8,
     paddingVertical: 2,
   },
-  dnaCodeText: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.bold, color: COLORS.white, letterSpacing: 1 },
-  dnaTitle: { fontSize: FONTS.size.sm, fontWeight: FONTS.weight.semibold, color: COLORS.gray[700] },
-  dnaDesc: { fontSize: FONTS.size.sm, color: COLORS.gray[500], marginBottom: 12, lineHeight: 18 },
+  dnaCodeText: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.bold, color: '#fff', letterSpacing: 1 },
+  dnaTitle: { fontSize: FONTS.size.sm, fontWeight: FONTS.weight.semibold, color: THEME.colors.textSub },
+  dnaDesc: { fontSize: FONTS.size.sm, color: THEME.colors.textMuted, marginBottom: 12, lineHeight: 18 },
   expandedSection: {
-    backgroundColor: COLORS.gray[100],
-    borderRadius: 10,
+    backgroundColor: THEME.colors.accentSoft,
+    borderRadius: THEME.radius.sm,
     padding: SPACING.sm,
     marginBottom: 12,
   },
   expandedLabel: {
     fontSize: FONTS.size.sm,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[700],
+    color: THEME.colors.textSub,
     marginBottom: 10,
   },
   viewBtn: {
@@ -240,11 +238,11 @@ const cardStyles = StyleSheet.create({
     justifyContent: 'center',
     gap: 6,
     borderWidth: 1,
-    borderColor: COLORS.gray[200],
-    borderRadius: 10,
+    borderColor: THEME.colors.border,
+    borderRadius: THEME.radius.sm,
     paddingVertical: 8,
   },
-  viewBtnText: { fontSize: FONTS.size.sm, fontWeight: FONTS.weight.medium, color: COLORS.primary },
+  viewBtnText: { fontSize: FONTS.size.sm, fontWeight: FONTS.weight.medium, color: THEME.colors.accentDark },
 });
 
 // ─── 메인 화면 ───────────────────────────────────────────
@@ -288,7 +286,7 @@ export default function CollaborativeScreen({ navigation }: Props) {
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>내 그룹</Text>
           <TouchableOpacity style={styles.createBtn} onPress={handleCreateGroup}>
-            <Ionicons name="add" size={16} color={COLORS.white} />
+            <Ionicons name="add" size={16} color="#fff" />
             <Text style={styles.createBtnText}>그룹 만들기</Text>
           </TouchableOpacity>
         </View>
@@ -305,7 +303,7 @@ export default function CollaborativeScreen({ navigation }: Props) {
 
         {/* 안내 문구 */}
         <View style={styles.tipBox}>
-          <Ionicons name="information-circle-outline" size={16} color={COLORS.gray[400]} />
+          <Ionicons name="information-circle-outline" size={16} color={THEME.colors.textMuted} />
           <Text style={styles.tipText}>
             그룹 구성원들의 저장 공간을 분석해{'\n'}그룹만의 공간 DNA를 도출해드려요
           </Text>
@@ -321,7 +319,7 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: SPACING.md,
     paddingTop: SPACING.md,
-    paddingBottom: 60,
+    paddingBottom: SPACING.xl,
   },
 
   headerRow: {
@@ -337,7 +335,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    ...THEME.shadow.float,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...THEME.shadow.soft,
   },
   pageTitle: {
     fontSize: FONTS.size.xxl,
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: THEME.colors.textMain,
-    borderRadius: 16,
+    borderRadius: THEME.radius.md,
     padding: SPACING.md,
     marginBottom: SPACING.lg,
     gap: 14,
@@ -386,30 +386,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: COLORS.primary,
-    borderRadius: 20,
+    backgroundColor: THEME.colors.accentDark,
+    borderRadius: THEME.radius.button,
     paddingHorizontal: 12,
     paddingVertical: 6,
   },
   createBtnText: {
     fontSize: FONTS.size.sm,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.white,
+    color: '#fff',
   },
 
   tipBox: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 8,
-    backgroundColor: COLORS.gray[100],
-    borderRadius: 12,
+    backgroundColor: THEME.colors.accentSoft,
+    borderRadius: THEME.radius.sm,
     padding: SPACING.sm,
     marginTop: SPACING.sm,
   },
   tipText: {
     flex: 1,
     fontSize: FONTS.size.sm,
-    color: COLORS.gray[500],
+    color: THEME.colors.textMuted,
     lineHeight: 18,
   },
 });

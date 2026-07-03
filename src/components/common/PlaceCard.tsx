@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.lg,
     overflow: 'hidden',
     marginBottom: THEME.spacing.md,
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
     ...THEME.shadow.soft,
   },
   thumbnail: {

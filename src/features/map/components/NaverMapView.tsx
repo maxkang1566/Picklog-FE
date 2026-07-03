@@ -26,7 +26,6 @@
 
 import React, { useRef } from 'react';
 import { StyleSheet, View, Text, Platform } from 'react-native';
-import Constants from 'expo-constants';
 import { MapMarker } from '../../../types';
 import { MAP_DEFAULTS, COLORS, FONTS } from '../../../constants';
 
@@ -46,6 +45,12 @@ function buildMapHTML(params: {
   markers: MapMarker[];
 }): string {
   const { authParam, centerLat, centerLng, zoom, markers } = params;
+
+  // 신규 발급 키(ncpKeyId)는 oapi.map.naver.com, 구발급 키(ncpClientId)는 openapi.map.naver.com 사용
+  // (2025년 개편 이후 공식 문서 기준: https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=...)
+  const scriptDomain = authParam.startsWith('ncpKeyId=')
+    ? 'https://oapi.map.naver.com'
+    : 'https://openapi.map.naver.com';
 
   const markersCode = markers
     .map(
@@ -84,7 +89,7 @@ function buildMapHTML(params: {
     #auth-error {
       display: none;
       position: fixed; inset: 0;
-      background: #FDF2E8;
+      background: #F7F8FA;
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -93,25 +98,49 @@ function buildMapHTML(params: {
       font-family: sans-serif;
     }
     #auth-error.show { display: flex; }
-    #auth-error h3 { font-size: 16px; color: #111; margin-bottom: 8px; }
-    #auth-error p  { font-size: 13px; color: #8E8E93; line-height: 1.5; }
+    #auth-error h3 { font-size: 16px; color: #191F28; margin-bottom: 8px; }
+    #auth-error p  { font-size: 13px; color: #8B95A1; line-height: 1.5; }
   </style>
 </head>
 <body>
   <div id="map"></div>
   <div id="auth-error">
     <h3>🗺 지도 인증 오류</h3>
-    <p>NCP 콘솔에서 발급한 키를<br>.env 파일에 설정해주세요.<br><br>
-    <code>EXPO_PUBLIC_NAVER_MAP_KEY_ID=발급된키</code></p>
+    <p id="auth-reason">인증에 실패했습니다.</p>
+    <p id="auth-debug" style="margin-top:12px;font-size:11px;color:#B0B0B5;word-break:break-all;"></p>
   </div>
+
+  <script>
+    // 진단용: 현재 WebView가 네이버에 보내는 Referer/URL 컨텍스트와 사용된 인증 파라미터
+    window.__AUTH_PARAM = ${JSON.stringify(authParam.split('=')[0] + '=' + (authParam.split('=')[1] ?? '').slice(0, 6) + '...')};
+    function showAuthError(reason) {
+      var el = document.getElementById('auth-error');
+      document.getElementById('auth-reason').innerText = reason;
+      document.getElementById('auth-debug').innerText =
+        'param: ' + window.__AUTH_PARAM +
+        '\\nreferrer: ' + (document.referrer || '(empty)') +
+        '\\nlocation: ' + location.href;
+      el.classList.add('show');
+      window.ReactNativeWebView && window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: 'authFail', reason: reason, referrer: document.referrer, location: location.href, param: window.__AUTH_PARAM })
+      );
+    }
+    // 네이버 지도 v3는 인증 실패 시 이 전역 함수를 호출함(정의 안 하면 기본 alert만 뜸)
+    window.navermap_authFailure = function() {
+      showAuthError('네이버 인증 거부: Client ID 또는 콘솔의 웹 서비스 URL(Referer) 불일치');
+    };
+  </script>
 
   <script
     type="text/javascript"
-    src="https://openapi.map.naver.com/openapi/v3/maps.js?${authParam}"
-    onerror="document.getElementById('auth-error').classList.add('show')"
+    src="${scriptDomain}/openapi/v3/maps.js?${authParam}"
+    onerror="showAuthError('maps.js 로드 실패: 네트워크 또는 잘못된 엔드포인트')"
   ></script>
   <script>
     try {
+      if (typeof naver === 'undefined' || !naver.maps) {
+        throw new Error('naver.maps 미로드');
+      }
       var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(${centerLat}, ${centerLng}),
         zoom: ${zoom},
@@ -129,10 +158,7 @@ function buildMapHTML(params: {
       });
       ${markersCode}
     } catch(e) {
-      document.getElementById('auth-error').classList.add('show');
-      window.ReactNativeWebView && window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: 'error', message: e.message })
-      );
+      showAuthError('지도 초기화 실패: ' + e.message);
     }
   </script>
 </body>
@@ -183,11 +209,12 @@ export default function NaverMapView({
     );
   }
 
-  // baseUrl을 localhost로 고정
-  // ncpClientId 방식은 NCP 콘솔에 등록된 도메인과 Referer가 일치해야 인증됨.
-  // 동적 IP(192.168.x.x)를 baseUrl로 쓰면 등록 도메인과 불일치 → 인증 실패.
-  // localhost로 고정하고 NCP 콘솔 허용 도메인에 http://localhost 를 추가해두면 됨.
-  const baseUrl = 'http://localhost:8081';
+  // baseUrl을 localhost로 고정 (포트 없이!)
+  // ncpClientId 방식은 NCP 콘솔에 등록된 웹 서비스 URL과 Referer가 일치해야 인증됨.
+  // Android WebView는 loadDataWithBaseURL의 baseUrl을 maps.js 요청 Referer로 실어 보냄.
+  // NCP는 Referer를 "호스트까지만" 검증하므로 콘솔에도 포트 없이 http://localhost 로 등록해야 함
+  //   (포트가 붙으면 매칭 실패 → 인증 실패). 동적 IP(192.168.x.x)를 쓰면 등록값과 불일치 → 실패.
+  const baseUrl = 'http://localhost';
   const html = buildMapHTML({ authParam, centerLat, centerLng, zoom, markers });
 
   // 에러 화면에 사용된 파라미터 정보 로그 (개발 디버깅용)
@@ -208,8 +235,13 @@ export default function NaverMapView({
   const handleMessage = (event: { nativeEvent: { data: string } }) => {
     try {
       const data = JSON.parse(event.nativeEvent.data);
-      if (data.type === 'error') {
-        console.warn('[NaverMap] 지도 초기화 오류:', data.message);
+      if (data.type === 'authFail') {
+        console.warn(
+          '[NaverMap] 인증 실패:', data.reason,
+          '\n  사용 파라미터:', data.param,
+          '\n  referrer:', data.referrer || '(empty)',
+          '\n  location:', data.location
+        );
       }
       if (data.type === 'markerPress' && onMarkerPress) {
         onMarkerPress(data.id);

@@ -24,7 +24,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/types';
 import { SpaceDNAResult } from '../../../types';
 import { useAuthStore } from '../../../store/useAuthStore';
-import { THEME, COLORS, FONTS, SPACING } from '../../../constants';
+import { THEME, FONTS, SPACING, shadowStyle } from '../../../constants';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SpaceDNAResult'>;
 
@@ -117,7 +117,7 @@ const barStyles = StyleSheet.create({
     height: 10,
     borderRadius: 5,
     overflow: 'hidden',
-    backgroundColor: COLORS.gray[200],
+    backgroundColor: THEME.colors.divider,
   },
   fill: { height: '100%' },
 });
@@ -225,7 +225,7 @@ export default function SpaceDNAResultScreen({ navigation, route }: Props) {
 
         {/* 완료 버튼 */}
         <TouchableOpacity
-          style={[styles.completeBtn, { backgroundColor: typeColor }, isLoading && styles.completeBtnDisabled]}
+          style={[styles.completeBtn, isLoading && styles.completeBtnDisabled]}
           onPress={handleComplete}
           disabled={isLoading}
           activeOpacity={0.85}
@@ -296,7 +296,9 @@ const styles = StyleSheet.create({
     padding: SPACING.lg,
     marginBottom: SPACING.lg,
     width: '100%',
-    ...Platform.select({ native: THEME.shadow.soft, web: THEME.shadowWeb.soft }),
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...shadowStyle('soft'),
   },
   descText: {
     fontSize: FONTS.size.md,
@@ -318,7 +320,9 @@ const styles = StyleSheet.create({
     borderRadius: THEME.radius.md,
     padding: SPACING.md,
     marginBottom: SPACING.sm,
-    ...Platform.select({ native: THEME.shadow.soft, web: THEME.shadowWeb.soft }),
+    borderWidth: 1,
+    borderColor: THEME.colors.border,
+    ...shadowStyle('soft'),
   },
   axisHeader: {
     flexDirection: 'row',
@@ -348,7 +352,8 @@ const styles = StyleSheet.create({
     gap: 8,
     width: '100%',
     paddingVertical: 16,
-    borderRadius: THEME.radius.lg,
+    backgroundColor: THEME.colors.accentDark,
+    borderRadius: THEME.radius.button,
     marginTop: SPACING.sm,
   },
   completeBtnDisabled: { opacity: 0.6 },

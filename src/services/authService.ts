@@ -17,11 +17,31 @@ const authService = {
    *    fetch()를 직접 사용합니다.
    */
   async login(email: string, password: string): Promise<string> {
-    const response = await fetch(`${API_CONFIG.baseURL}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
-    });
+    // fetch는 기본 타임아웃이 없어, 서버가 응답을 안 주면 무한 대기함.
+    // AbortController로 상한을 두어 무한 스피너 대신 에러로 처리되게 함.
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.timeout);
+
+    let response: Response;
+    try {
+      response = await fetch(`${API_CONFIG.baseURL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+        signal: controller.signal,
+      });
+    } catch (e) {
+      // abort 또는 네트워크 실패 — useAuthStore가 메시지를 보여주도록 message를 채워 throw
+      const aborted = (e as { name?: string })?.name === 'AbortError';
+      throw {
+        message: aborted
+          ? `서버 응답이 ${API_CONFIG.timeout / 1000}초 내에 오지 않았어요. 백엔드/DB 상태를 확인해주세요.`
+          : (e as { message?: string })?.message ?? '네트워크 오류',
+      };
+    } finally {
+      clearTimeout(timeoutId);
+    }
+
     const data = await response.json() as { access_token?: string; detail?: string };
     if (!response.ok) {
       // Axios 에러 모양과 동일하게 throw 해서 useAuthStore가 그대로 처리 가능

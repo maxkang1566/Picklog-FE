@@ -183,7 +183,7 @@ export default function StorageInvitationsScreen({ route, navigation }: Props) {
           onPress={() => handleRevoke(item)}
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         >
-          <Ionicons name="trash-outline" size={18} color="#FF3B30" />
+          <Ionicons name="trash-outline" size={18} color={THEME.colors.error} />
         </TouchableOpacity>
       </View>
     </View>
@@ -213,7 +213,7 @@ export default function StorageInvitationsScreen({ route, navigation }: Props) {
           }
           ListEmptyComponent={
             <View style={styles.empty}>
-              <Ionicons name="mail-open-outline" size={48} color={COLORS.gray[300]} />
+              <Ionicons name="mail-open-outline" size={48} color={THEME.colors.textPlaceholder} />
               <Text style={styles.emptyText}>활성 초대가 없습니다</Text>
             </View>
           }
@@ -331,8 +331,8 @@ const styles = StyleSheet.create({
     gap: SPACING.sm,
     margin: SPACING.md,
     padding: SPACING.md,
-    backgroundColor: COLORS.primary,
-    borderRadius: THEME.radius.md,
+    backgroundColor: THEME.colors.accentDark,
+    borderRadius: THEME.radius.button,
     justifyContent: 'center',
   },
   createBtnText: {
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONTS.size.md,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[700],
+    color: THEME.colors.textSub,
     marginBottom: SPACING.sm,
   },
 
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     padding: SPACING.md,
     marginBottom: SPACING.sm,
     borderWidth: 1,
-    borderColor: COLORS.gray[100],
+    borderColor: THEME.colors.border,
     gap: SPACING.sm,
   },
   invInfo: { flex: 1, gap: 4 },
@@ -367,18 +367,18 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     borderRadius: THEME.radius.pill,
   },
-  roleBadgeOwner: { backgroundColor: '#FFF3CD' },
-  roleBadgeEditor: { backgroundColor: '#E8F0FE' },
-  roleText: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.semibold, color: COLORS.gray[700] },
-  invExpiry: { fontSize: FONTS.size.xs, color: COLORS.gray[500] },
-  invBy: { fontSize: FONTS.size.xs, color: COLORS.gray[500] },
+  roleBadgeOwner: { backgroundColor: THEME.colors.accentSoft },
+  roleBadgeEditor: { backgroundColor: THEME.colors.accentSoft },
+  roleText: { fontSize: FONTS.size.xs, fontWeight: FONTS.weight.semibold, color: THEME.colors.textSub },
+  invExpiry: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted },
+  invBy: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted },
   invToken: { fontSize: FONTS.size.xs, color: COLORS.primary, marginTop: 2 },
 
   invActions: { justifyContent: 'center', gap: SPACING.sm },
   iconBtn: { padding: 4 },
 
   empty: { alignItems: 'center', paddingVertical: 40, gap: SPACING.md },
-  emptyText: { fontSize: FONTS.size.md, color: COLORS.gray[500] },
+  emptyText: { fontSize: FONTS.size.md, color: THEME.colors.textMuted },
 
   linkBox: {
     backgroundColor: THEME.colors.accentSoft,
@@ -399,7 +399,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primary,
   },
   linkBtnText: { fontSize: FONTS.size.md, color: COLORS.primary, fontWeight: FONTS.weight.medium },
-  closeText: { textAlign: 'center', color: COLORS.gray[500], fontSize: FONTS.size.md, paddingVertical: 4 },
+  closeText: { textAlign: 'center', color: THEME.colors.textMuted, fontSize: FONTS.size.md, paddingVertical: 4 },
 });
 
 const modalStyles = StyleSheet.create({
@@ -423,23 +423,23 @@ const modalStyles = StyleSheet.create({
   label: {
     fontSize: FONTS.size.sm,
     fontWeight: FONTS.weight.semibold,
-    color: COLORS.gray[600],
+    color: THEME.colors.textSub,
     marginTop: SPACING.sm,
   },
   optionRow: { flexDirection: 'row', gap: SPACING.sm },
   option: {
     flex: 1,
     borderWidth: 1.5,
-    borderColor: COLORS.gray[200],
+    borderColor: THEME.colors.border,
     borderRadius: THEME.radius.md,
     padding: SPACING.md,
     gap: 4,
   },
-  optionSelected: { borderColor: COLORS.primary, backgroundColor: '#EEF2FF' },
-  optionLabel: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: COLORS.gray[700] },
-  optionLabelSelected: { color: COLORS.primary },
-  optionDesc: { fontSize: FONTS.size.xs, color: COLORS.gray[500] },
-  optionDescSelected: { color: COLORS.primary },
+  optionSelected: { borderColor: THEME.colors.accentDark, backgroundColor: THEME.colors.accentSoft },
+  optionLabel: { fontSize: FONTS.size.md, fontWeight: FONTS.weight.semibold, color: THEME.colors.textSub },
+  optionLabelSelected: { color: THEME.colors.textMain },
+  optionDesc: { fontSize: FONTS.size.xs, color: THEME.colors.textMuted },
+  optionDescSelected: { color: THEME.colors.textSub },
 
   chipScroll: { marginTop: 4 },
   chipRow: { flexDirection: 'row', gap: SPACING.sm, paddingVertical: 2 },
@@ -448,17 +448,17 @@ const modalStyles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: THEME.radius.pill,
     borderWidth: 1,
-    borderColor: COLORS.gray[200],
-    backgroundColor: COLORS.gray[100],
+    borderColor: THEME.colors.border,
+    backgroundColor: THEME.colors.surface,
   },
-  chipSelected: { borderColor: COLORS.primary, backgroundColor: '#EEF2FF' },
-  chipText: { fontSize: FONTS.size.sm, color: COLORS.gray[600] },
-  chipTextSelected: { color: COLORS.primary, fontWeight: FONTS.weight.semibold },
+  chipSelected: { borderColor: THEME.colors.accentDark, backgroundColor: THEME.colors.accentSoft },
+  chipText: { fontSize: FONTS.size.sm, color: THEME.colors.textSub },
+  chipTextSelected: { color: THEME.colors.textMain, fontWeight: FONTS.weight.semibold },
 
   confirmBtn: {
     marginTop: SPACING.md,
-    backgroundColor: COLORS.primary,
-    borderRadius: THEME.radius.md,
+    backgroundColor: THEME.colors.accentDark,
+    borderRadius: THEME.radius.button,
     paddingVertical: 14,
     alignItems: 'center',
   },

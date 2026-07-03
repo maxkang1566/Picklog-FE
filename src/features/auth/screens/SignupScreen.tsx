@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
-    borderColor: THEME.colors.bgMid,
+    borderColor: THEME.colors.surface,
   },
   profileLabel: {
     fontSize: THEME.font.size.sm,
